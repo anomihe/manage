@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "21963516363",
+    "project_id": "sale-manage-e18da",
+    "storage_bucket": "sale-manage-e18da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21963516363:android:7760ca2a44715a9fccae4e",
+        "android_client_info": {
+          "package_name": "com.example.manage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21963516363-k2tolin1kgrj3g6tsamvgmfjvu823gbs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDljV-uYhepBc_GVeqIBNxldW3vJHvI4Hk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21963516363-k2tolin1kgrj3g6tsamvgmfjvu823gbs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
