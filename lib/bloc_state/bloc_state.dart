@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 abstract class ManageState {
   const ManageState();
@@ -17,7 +19,7 @@ class LoginState extends ManageState {
 class RegisterState extends ManageState {
   // final String username;
   // final String password;
-  final User user; 
+  final User user;
   const RegisterState({
     required this.user,
   });
@@ -31,4 +33,10 @@ class LogOutState extends ManageState {
 
 class UploadState extends ManageState {}
 
-class AddState extends ManageState {}
+class AddState extends ManageState {
+  // final String name;
+  // final String description;
+  // final Reference imagePath;
+  final void store;
+  AddState({required this.store});
+}
