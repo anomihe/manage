@@ -1,7 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:manage/bloc_state/bloc_event.dart';
+import 'package:manage/bloc_state/bloc_state.dart';
+import 'package:manage/bloc_state/main_bloc.dart';
 
 class AddNew extends StatefulWidget {
   const AddNew({Key? key}) : super(key: key);
@@ -34,39 +38,72 @@ class _AddNewState extends State<AddNew> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: const BoxDecoration(
-          color: Colors.blueGrey,
-        ),
-        child: Column(children: [
-          TextField(controller: nameCont),
-          TextField(controller: desCont),
-          imagefile == null
-              ? IconButton(
-                  onPressed: () {
-                    _getFromCamera();
-                  },
-                  icon: const Icon(
-                    Icons.add_a_photo,
+    return Scaffold(
+      body: BlocListener<MainBloc, ManageState>(
+        listener: ((context, state) {
+          if (state is AddState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Added to database')));
+          }
+        }),
+        child: Container(
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+              color: Colors.blueGrey,
+            ),
+            child: Column(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(
+                    height: 100,
                   ),
-                )
-              : Image.file(
-                  imagefile!,
-                  fit: BoxFit.cover,
-                ),
-          // Container(
-          //   child: imagefile ==null: Colu,
-          // )
-          MaterialButton(
-            onPressed: () {
-              Navigator.pop(context);
-              nameCont.clear();
-              desCont.clear();
-              // imagefile!.delete();
-              added = true;
-            },
-            child: const Text('add'),
-          )
-        ]));
+                  TextField(controller: nameCont),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  TextField(controller: desCont),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  SizedBox(
+                    height: 150,
+                    width: 150,
+                    child: imagefile == null
+                        ? IconButton(
+                            onPressed: () {
+                              _getFromCamera();
+                            },
+                            icon: const Icon(
+                              Icons.add_a_photo,
+                            ),
+                          )
+                        : Image.file(
+                            imagefile!,
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                  // Container(
+                  //   child: imagefile ==null: Colu,
+                  // )
+                  MaterialButton(
+                    onPressed: () {
+                      BlocProvider.of<MainBloc>(context).add(AddEvent(
+                        name: nameCont.text,
+                        description: desCont.text,
+                        imagePath: imagefile!.path,
+                        price: '',
+                      ));
+                      Navigator.pop(context);
+                      nameCont.clear();
+                      desCont.clear();
+                      // imagefile!.delete();
+                      added = true;
+                    },
+                    child: const Text('add'),
+                  )
+                ])),
+      ),
+    );
   }
 }

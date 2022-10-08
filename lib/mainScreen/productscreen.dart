@@ -36,7 +36,9 @@ class _NewProductScreenState extends State<NewProductScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/adding');
+              },
               heroTag: 'add',
               backgroundColor: Colors.grey,
               child: const Icon(Icons.add),

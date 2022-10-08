@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:manage/mainScreen/addingNewProd/addNew.dart';
 import 'package:manage/mainScreen/firstExport.dart';
+import 'package:manage/mainScreen/registar.dart';
 
 class ManagementRoute {
   Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -19,6 +21,14 @@ class ManagementRoute {
       case '/New_Products':
         return MaterialPageRoute(builder: (_) {
           return const NewProductScreen();
+        });
+      case '/adding':
+        return MaterialPageRoute(builder: (_) {
+          return const AddNew();
+        });
+      case '/register':
+        return MaterialPageRoute(builder: (_) {
+          return const RegisterScreen();
         });
       case '/log out':
         return MaterialPageRoute(builder: (_) {
