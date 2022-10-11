@@ -44,10 +44,11 @@ class Home extends StatelessWidget {
               // if (state is LoadingState) {
               //   return const LoginScreen();
               // }
-              if (state is LoginState) {
+              else if (state is LoginState) {
                 return const Homepage();
-              }
-              if (state is RegisterState) {
+              } else if (state is LoginState) {
+                return const Homepage();
+              } else if (state is RegistrationView) {
                 return const RegisterScreen();
               } else {
                 return const Center(child: CircularProgressIndicator());

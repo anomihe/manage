@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 MaterialButton(
                     onPressed: () {
                       context.read<MainBloc>().add(const AppEventGoToReg());
-                      Navigator.pushNamed(context, '/register');
+                      // Navigator.pushNamed(context, '/register');
                     },
                     child: const Text('Register'))
               ],

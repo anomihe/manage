@@ -28,17 +28,17 @@ class AddingEvents extends ManageEvent {
 //   List<Object?> get props => [username, password];
 // }
 
-class RegistrationEvent extends ManageEvent {
-  final String username;
-  final String password;
-  const RegistrationEvent({
-    required this.username,
-    required this.password,
-  });
+// class RegistrationEvent extends ManageEvent {
+//   final String username;
+//   final String password;
+//   const RegistrationEvent({
+//     required this.username,
+//     required this.password,
+//   });
 
-  @override
-  List<Object?> get props => [username, password];
-}
+//   @override
+//   List<Object?> get props => [username, password];
+// }
 
 class AddEvent extends ManageEvent {
   final String name;
@@ -88,7 +88,7 @@ class Create extends ManageEvent {
   });
 
   @override
-  List<Object> get props => [username, password];
+  List<Object?> get props => [username, password];
 }
 
 class LoginEvent extends ManageEvent {
@@ -100,19 +100,19 @@ class LoginEvent extends ManageEvent {
   });
 
   @override
-  List<Object> get props => [username, password];
+  List<Object?> get props => [username, password];
 }
 
 class LogOut extends ManageEvent {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class AppEventGoToReg implements ManageEvent {
   const AppEventGoToReg();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 
   @override
   // TODO: implement stringify

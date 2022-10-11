@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,7 +14,13 @@ import 'package:manage/models/firebaseModels/models_fire.dart';
 
 class MainBloc extends Bloc<ManageEvent, ManageState> {
   final ProductRepo repo;
-  MainBloc(this.repo) : super(const GettingProd()) {
+
+//final UserblocDartBloc _users;
+
+  // late StreamSubscription subscription;
+  MainBloc(
+    this.repo,
+  ) : super(const GettingProd()) {
     // on<LoginEvent>((event, emit) async {
     //   try {
     //     final username = event.username;
@@ -92,6 +99,9 @@ class MainBloc extends Bloc<ManageEvent, ManageState> {
       //       .map((doc) => FireModels.fromJson(doc.data()))
       //       .toList();
       // });
+      // subscription = _users.stream.listen((event) {
+      //   add(LoginEvent(username: username, password: password));
+      // });
       try {
         final data = await repo.get();
         emit(LoadState(models: data));
@@ -135,8 +145,10 @@ class MainBloc extends Bloc<ManageEvent, ManageState> {
           final use = await repo.login(email: username, password: password);
           final used = use.user!;
           emit(LoginState(user: used));
+          // final data = await repo.get();
+          // emit(LoadState(models: data));
         } catch (e) {
-          debugPrint(e.toString());
+          debugPrint('this is the error ${e.toString()}');
         }
       } catch (e) {
         debugPrint(e.toString());
@@ -149,5 +161,7 @@ class MainBloc extends Bloc<ManageEvent, ManageState> {
     on<AppEventGoToReg>((event, emit) {
       emit(const RegistrationView());
     });
+
+    //ended here
   }
 }

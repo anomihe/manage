@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:manage/bloc_state/bloc_event.dart';
 import 'package:manage/bloc_state/main_bloc.dart';
 
+import '../bloc_state/credn/userbloc_dart_bloc.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
