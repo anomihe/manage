@@ -30,8 +30,18 @@ class _AllproductsState extends State<Allproducts> {
           return ListView.builder(
             itemCount: state.models.length,
             itemBuilder: ((context, index) {
-              return ListTile(
-                title: Text(state.models[index].name),
+              return Card(
+                child: Row(
+                  children: [
+                    const SizedBox(),
+                    Column(
+                      children: [
+                        Text(state.models[index].name),
+                        Text(state.models[index].desc),
+                      ],
+                    )
+                  ],
+                ),
               );
             }),
           );

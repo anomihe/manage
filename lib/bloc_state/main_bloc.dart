@@ -147,6 +147,8 @@ class MainBloc extends Bloc<ManageEvent, ManageState> {
           emit(LoginState(user: used));
           // final data = await repo.get();
           // emit(LoadState(models: data));
+        } on FirebaseAuthException catch (e) {
+          debugPrint('this is the error ${e.toString()}');
         } catch (e) {
           debugPrint('this is the error ${e.toString()}');
         }

@@ -57,13 +57,12 @@ class AddEvent extends ManageEvent {
 
 class LogOutEvent extends ManageEvent {
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 class UploadEvent extends ManageEvent {
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 class LoadEvent extends ManageEvent {
@@ -108,13 +107,9 @@ class LogOut extends ManageEvent {
   List<Object?> get props => [];
 }
 
-class AppEventGoToReg implements ManageEvent {
+class AppEventGoToReg extends ManageEvent {
   const AppEventGoToReg();
 
   @override
   List<Object?> get props => [];
-
-  @override
-  // TODO: implement stringify
-  bool? get stringify => throw UnimplementedError();
 }
