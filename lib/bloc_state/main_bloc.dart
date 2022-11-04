@@ -17,7 +17,7 @@ class MainBloc extends Bloc<ManageEvent, ManageState> {
 
 //final UserblocDartBloc _users;
 
-  // late StreamSubscription subscription;
+  StreamSubscription? subscription;
   MainBloc(
     this.repo,
   ) : super(const GettingProd()) {
@@ -54,30 +54,35 @@ class MainBloc extends Bloc<ManageEvent, ManageState> {
     //   await FirebaseAuth.instance.signOut();
     //   emit(const LogOutState());
     // });
+    on<LoadingEvent>((event, emit) => const LoadingState());
     on<AddingEvents>((event, emit) {
       emit(const GettingProd());
     });
     on<AddEvent>((event, emit) async {
       try {
-        final name = event.name;
-        final description = event.description;
-        final imagePath = File(event.imagePath);
-        final ref = FirebaseStorage.instance
-            .ref()
-            .child('productionImages')
-            .child('$name.jpg');
-        await ref.putFile(imagePath);
-        final url = await ref.getDownloadURL();
+        //final name = event.name;
+        // final description = event.description;
+        //final price = event.price;
+        // final name = event.models.name;
+        // final description = event.models.desc;
+        // final imagePath = File(event.imagePath);
+        // final ref = FirebaseStorage.instance
+        //     .ref()
+        //     .child('productionImages')
+        //     .child('$name.jpg');
+        // await ref.putFile(imagePath);
+        //final url = await ref.getDownloadURL();
         // await FirebaseFirestore.instance.collection('products').doc().set({
         //   'name': name,
         //   'description': description,
         //   'imagePath': url,
         // });
-        await repo.creates(
-            name: name,
-            description: description,
-            price: event.price,
-            imagePath: url);
+        // await repo.creates(
+        //     name: name,
+        //     description: description,
+        //     price: event.price,
+        //     imagePath: url);
+        repo.creates(models: event.models);
         // final state= this.state;
         //  if(state is LoadState){
         emit(
@@ -102,15 +107,22 @@ class MainBloc extends Bloc<ManageEvent, ManageState> {
       // subscription = _users.stream.listen((event) {
       //   add(LoginEvent(username: username, password: password));
       // });
+      //List<FireModels> mood = await ProductRepo.geting().listen((event) add(UpdateEvent(models: models)));
+      subscription?.cancel();
+      subscription =
+          repo.geting().listen((models) => add(UpdateEvent(models: models)));
       try {
-        final data = await repo.get();
-        emit(LoadState(models: data));
+        // final data = await repo.get();
+        // emit(LoadState(models: ));
+
       } catch (e) {
         print(e);
       }
       // emit(LoadState(models: data));
     });
-
+    on<UpdateEvent>((event, emit) {
+      emit(LoadState(models: event.models));
+    });
     //from used bloc
     on<AddingEvent>((event, emit) {
       emit(const LoadingState());
@@ -145,6 +157,12 @@ class MainBloc extends Bloc<ManageEvent, ManageState> {
           final use = await repo.login(email: username, password: password);
           final used = use.user!;
           emit(LoginState(user: used));
+          try {
+            // final data = await ProductRepo.get();
+            // emit(LoadState(models: data));
+          } catch (e) {
+            print(e);
+          }
           // final data = await repo.get();
           // emit(LoadState(models: data));
         } on FirebaseAuthException catch (e) {
@@ -165,5 +183,12 @@ class MainBloc extends Bloc<ManageEvent, ManageState> {
     });
 
     //ended here
+
+    // on<UpdateEvent>((event, emit) {
+    //   final state = this.state;
+    //   if(state is LoadState){
+
+    //   }
+    // });
   }
 }

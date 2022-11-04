@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:manage/bloc_state/bloc_event.dart';
@@ -14,9 +16,14 @@ class Allproducts extends StatefulWidget {
 }
 
 class _AllproductsState extends State<Allproducts> {
+  MainBloc refresh = MainBloc(ProductRepo());
+  late FireModels repoModels;
+  ProductRepo main = ProductRepo();
   @override
   void initState() {
+    // MainBloc refresh = MainBloc(ProductRepo());
     super.initState();
+
     BlocProvider.of<MainBloc>(context).add(const LoadEvent());
   }
 
@@ -27,17 +34,25 @@ class _AllproductsState extends State<Allproducts> {
       bloc: MainBloc(ProductRepo()),
       builder: (context, state) {
         if (state is LoadState) {
+          // List<FireModels> data = state.models;
+
           return ListView.builder(
-            itemCount: state.models.length,
+//future:refresh ,
+
+            // itemCount: data.length,
             itemBuilder: ((context, index) {
               return Card(
                 child: Row(
                   children: [
-                    const SizedBox(),
+                    Image.network(state.models[index].path),
+// SizedBox(
+// image.memory()
+// ),
                     Column(
                       children: [
                         Text(state.models[index].name),
                         Text(state.models[index].desc),
+                        Text(state.models[index].price.toString()),
                       ],
                     )
                   ],

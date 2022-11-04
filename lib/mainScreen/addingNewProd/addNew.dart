@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:manage/bloc_state/bloc_event.dart';
 import 'package:manage/bloc_state/bloc_state.dart';
 import 'package:manage/bloc_state/main_bloc.dart';
+import 'package:manage/models/firebaseModels/models_fire.dart';
 
 class AddNew extends StatefulWidget {
   const AddNew({Key? key}) : super(key: key);
@@ -88,17 +89,24 @@ class _AddNewState extends State<AddNew> {
                   // )
                   MaterialButton(
                     onPressed: () {
-                      BlocProvider.of<MainBloc>(context).add(AddEvent(
+                      var added = FireModels(
                         name: nameCont.text,
-                        description: desCont.text,
-                        imagePath: imagefile!.path,
-                        price: '',
+                        desc: desCont.text,
+                        path: imagefile!.path,
+                        price: 0,
+                      );
+                      BlocProvider.of<MainBloc>(context).add(AddEvent(
+                        models: added,
+                        // name: nameCont.text,
+                        // description: desCont.text,
+                        // imagePath: imagefile!.path,
+                        // price: '',
                       ));
                       Navigator.pop(context);
                       nameCont.clear();
                       desCont.clear();
                       // imagefile!.delete();
-                      added = true;
+                      // added = true;
                     },
                     child: const Text('add'),
                   )

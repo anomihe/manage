@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manage/mainScreen/addingNewProd/addNew.dart';
+import 'package:manage/mainScreen/addingNewProd/update.dart';
 import 'package:manage/mainScreen/firstExport.dart';
 import 'package:manage/mainScreen/registar.dart';
 
@@ -23,6 +24,14 @@ class ManagementRoute {
           return const NewProductScreen();
         });
       case '/adding':
+        return MaterialPageRoute(builder: (_) {
+          return const AddNew();
+        });
+      // case '/update':
+      //   return MaterialPageRoute(builder: (_) {
+      //     return const Update();
+      //   });
+      case '/add':
         return MaterialPageRoute(builder: (_) {
           return const AddNew();
         });

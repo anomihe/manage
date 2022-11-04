@@ -24,14 +24,15 @@ void main() async {
 }
 
 class Home extends StatelessWidget {
-  final ManagementRoute route;
   const Home({Key? key, required this.route}) : super(key: key);
+
+  final ManagementRoute route;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       lazy: false,
-      create: (context) => MainBloc(ProductRepo())..add(const LoadEvent()),
+      create: (_) => MainBloc(ProductRepo())..add(const LoadEvent()),
       child: MaterialApp(
           onGenerateRoute: route.generateRoute,
           title: 'Management',
@@ -44,11 +45,15 @@ class Home extends StatelessWidget {
               // if (state is LoadingState) {
               //   return const LoginScreen();
               // }
-              else if (state is LoginState) {
-                return const Homepage();
+              else if (state is LoadState) {
+                return const Allproducts();
               } else if (state is LoginState) {
                 return const Homepage();
-              } else if (state is RegistrationView) {
+              }
+              //else if (state is LoginState) {
+              //   return  Homepage();
+              // }
+              else if (state is RegistrationView) {
                 return const RegisterScreen();
               } else {
                 return const Center(child: CircularProgressIndicator());

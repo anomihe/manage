@@ -40,19 +40,29 @@ class AddingEvents extends ManageEvent {
 //   List<Object?> get props => [username, password];
 // }
 
-class AddEvent extends ManageEvent {
-  final String name;
-  final String description;
-  final String price;
-  final String imagePath;
+// class AddEvent extends ManageEvent {
+//   final String name;
+//   final String description;
+//   final String price;
+//   final String imagePath;
 
-  const AddEvent(
-      {required this.name,
-      required this.description,
-      required this.price,
-      required this.imagePath});
+//   const AddEvent(
+//       {required this.name,
+//       required this.description,
+
+//       required this.price,
+//       required this.imagePath});
+//   @override
+//   List<Object?> get props => [name, description, imagePath];
+// }
+class AddEvent extends ManageEvent {
+  final FireModels models;
+
+  const AddEvent({
+    required this.models,
+  });
   @override
-  List<Object?> get props => [name, description, imagePath];
+  List<Object?> get props => [models];
 }
 
 class LogOutEvent extends ManageEvent {
@@ -63,6 +73,20 @@ class LogOutEvent extends ManageEvent {
 class UploadEvent extends ManageEvent {
   @override
   List<Object?> get props => [];
+}
+
+class DeleteEvent extends ManageEvent {
+  final FireModels models;
+  const DeleteEvent({required this.models});
+  @override
+  List<Object?> get props => [models];
+}
+
+class UpdateEvent extends ManageEvent {
+  final List<FireModels> models;
+  const UpdateEvent({required this.models});
+  @override
+  List<Object?> get props => [models];
 }
 
 class LoadEvent extends ManageEvent {

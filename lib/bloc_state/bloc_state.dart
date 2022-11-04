@@ -65,7 +65,7 @@ class AddState extends ManageState {
 
 class LoadState extends ManageState {
   final List<FireModels> models;
-  const LoadState({required this.models});
+  const LoadState({this.models = const <FireModels>[]});
   @override
   List<Object?> get props => [models];
 }
