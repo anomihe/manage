@@ -21,6 +21,7 @@ class _AddNewState extends State<AddNew> {
   final ImagePicker _picker = ImagePicker();
   TextEditingController nameCont = TextEditingController();
   TextEditingController desCont = TextEditingController();
+  TextEditingController priceCont = TextEditingController();
   Future _getFromCamera() async {
     try {
       final imagefile = await _picker.pickImage(source: ImageSource.camera);
@@ -47,70 +48,76 @@ class _AddNewState extends State<AddNew> {
                 const SnackBar(content: Text('Added to database')));
           }
         }),
-        child: Container(
-            height: MediaQuery.of(context).size.height,
-            decoration: const BoxDecoration(
-              color: Colors.blueGrey,
-            ),
-            child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  TextField(controller: nameCont),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  TextField(controller: desCont),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  SizedBox(
-                    height: 150,
-                    width: 150,
-                    child: imagefile == null
-                        ? IconButton(
-                            onPressed: () {
-                              _getFromCamera();
-                            },
-                            icon: const Icon(
-                              Icons.add_a_photo,
-                            ),
-                          )
-                        : Image.file(
-                            imagefile!,
-                            fit: BoxFit.cover,
-                          ),
-                  ),
-                  // Container(
-                  //   child: imagefile ==null: Colu,
-                  // )
-                  MaterialButton(
-                    onPressed: () {
-                      var added = FireModels(
-                        name: nameCont.text,
-                        desc: desCont.text,
-                        path: imagefile!.path,
-                        price: 0,
-                      );
-                      BlocProvider.of<MainBloc>(context).add(AddEvent(
-                        models: added,
-                        // name: nameCont.text,
-                        // description: desCont.text,
-                        // imagePath: imagefile!.path,
-                        // price: '',
-                      ));
-                      Navigator.pop(context);
-                      nameCont.clear();
-                      desCont.clear();
-                      // imagefile!.delete();
-                      // added = true;
-                    },
-                    child: const Text('add'),
-                  )
-                ])),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Container(
+                height: MediaQuery.of(context).size.height,
+                decoration: const BoxDecoration(
+                  color: Colors.blueGrey,
+                ),
+                child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 100,
+                      ),
+                      TextField(controller: nameCont),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                      TextField(controller: desCont),
+                      TextField(controller: priceCont),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                      SizedBox(
+                        height: 150,
+                        width: 150,
+                        child: imagefile == null
+                            ? IconButton(
+                                onPressed: () {
+                                  _getFromCamera();
+                                },
+                                icon: const Icon(
+                                  Icons.add_a_photo,
+                                ),
+                              )
+                            : Image.file(
+                                imagefile!,
+                                fit: BoxFit.cover,
+                              ),
+                      ),
+                      // Container(
+                      //   child: imagefile ==null: Colu,
+                      // )
+                      MaterialButton(
+                        onPressed: () {
+                          var added = FireModels(
+                            name: nameCont.text,
+                            desc: desCont.text,
+                            path: imagefile!.path,
+                            price: int.parse(priceCont.text),
+                          );
+                          BlocProvider.of<MainBloc>(context).add(AddEvent(
+                            models: added,
+                            // name: nameCont.text,
+                            // description: desCont.text,
+                            // imagePath: imagefile!.path,
+                            // price: '',
+                          ));
+                          Navigator.pop(context);
+                          nameCont.clear();
+                          desCont.clear();
+                          // imagefile!.delete();
+                          // added = true;
+                        },
+                        child: const Text('add'),
+                      )
+                    ])),
+          ),
+        ),
       ),
     );
   }

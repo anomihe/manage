@@ -192,10 +192,11 @@ class ProductRepo {
         .ref()
         .child('productionImages')
         .child('${models.name}.jpg');
+    // image = Image.memory
 
-    Reference reff = FirebaseStorage.instance.refFromURL(models.path);
-    await reff.putFile(imagePath);
-    final url = await reff.getDownloadURL();
+    // Reference reff = FirebaseStorage.instance.refFromURL(models.path);
+    await ref.putFile(imagePath);
+    final url = await ref.getDownloadURL();
     // User? use = user.currentUser;
     // final uid = use!.uid;
 

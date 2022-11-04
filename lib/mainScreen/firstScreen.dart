@@ -106,7 +106,7 @@ class _HomepageState extends State<Homepage> {
                                                         // context.read<MainBloc>();
                                                         repo.delete(snapshot
                                                             .data![index]);
-                                                        Navigator.pop(context);
+                                                        // Navigator.pop(context);
                                                       }),
                                                       description:
                                                           'Do you wish to delete the product');
